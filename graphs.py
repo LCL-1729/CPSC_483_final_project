@@ -414,6 +414,12 @@ def sharpe(actions, actual_returns, labels, multi=True):
         ceq_1=0
     return count_short,count_long,count_short_l,count_long_l,sharpe_comb,sharpe_1,long_sharpe,ceq,ceq_1
 
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument("--gat_state", type=str, default="arma", choices=["gat", "gcn", "deepgcn", "arma"], help="Type of graph convolution to use.")
+args = parser.parse_args()
+
 model = GAT(
     hidden_dim=[seq_len-48,12,12,12,12,12,12],
     num_layers=0,
@@ -422,7 +428,7 @@ model = GAT(
     num_stock=5,
     conv_state_1=True,
     conv_state_2=False,
-    gat_state='arma',
+    gat_state=args.gat_state,
     pooling_state="cnn"
 ).to(device)
 
@@ -465,7 +471,7 @@ plt.plot(epochs, train_sharpe_list, label='Train Sharpe', marker='o')
 plt.plot(epochs, test_sharpe_list, label='Test Sharpe', marker='o')
 plt.xlabel('Epoch')
 plt.ylabel('Sharpe Ratio')
-plt.title('Train and Test Sharpe Ratios Over Epochs')
+plt.title(f'Train and Test Sharpe Ratios for {args.gat_state} Over Epochs')
 plt.grid(True)
 plt.legend()
 plt.savefig('./sharpe_ratios.png')
