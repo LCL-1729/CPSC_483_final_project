@@ -1,4 +1,4 @@
-Step 1:
-Create a virtual environment that contains the packages in Requirements.txt.
-Step 2:
+Step 1:\n
+Create a virtual environment that contains the packages in Requirements.txt.\n
+Step 2:\n
 Run "python graph.py".
