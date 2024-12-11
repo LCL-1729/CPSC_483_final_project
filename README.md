@@ -8,4 +8,6 @@ Go to the website "https://data.mendeley.com/datasets/byjnr4kz5v/3" to retrieve 
 
 Step 3:
 
-Run "python graph.py".
+Choose type of graph convolution to use: ["gat", "gcn"]
+
+Run "python graph.py --gat_state {chosen graph convolution}".
